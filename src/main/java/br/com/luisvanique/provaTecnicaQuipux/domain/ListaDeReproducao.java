@@ -1,13 +1,26 @@
 package br.com.luisvanique.provaTecnicaQuipux.domain;
 
-import java.util.List;
+import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.UUID;
+
+@Entity(name = "ListaDeReproducao")
+@Table(name = "tb_listaDeReproducao")
 public class ListaDeReproducao {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "nome")
     private String nome;
 
+    @Column(name = "descricao")
     private String descricao;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "lista_id")
     private List<Musica> musicas;
 
     public ListaDeReproducao() {
