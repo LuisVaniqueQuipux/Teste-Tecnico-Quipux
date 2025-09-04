@@ -1,5 +1,6 @@
 package br.com.luisvanique.provaTecnicaQuipux.domain;
 
+import br.com.luisvanique.provaTecnicaQuipux.dtos.MusicaDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -18,15 +19,15 @@ public class Musica {
 
     private String album;
 
-    private LocalDate ano;
+    private String ano;
 
     private String genero;
 
-    public LocalDate getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(LocalDate ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 
@@ -66,5 +67,11 @@ public class Musica {
 
     }
 
-
+    public Musica(String titulo, String artista, String album, String ano, String genero) {
+        this.titulo = titulo;
+        this.artista = artista;
+        this.album = album;
+        this.ano = ano;
+        this.genero = genero;
+    }
 }

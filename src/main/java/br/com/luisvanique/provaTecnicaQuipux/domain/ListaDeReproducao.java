@@ -1,9 +1,11 @@
 package br.com.luisvanique.provaTecnicaQuipux.domain;
 
+import br.com.luisvanique.provaTecnicaQuipux.dtos.ListaReproducaoDTO;
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity(name = "ListaDeReproducao")
 @Table(name = "tb_listaDeReproducao")
@@ -25,6 +27,15 @@ public class ListaDeReproducao {
 
     public ListaDeReproducao() {
 
+    }
+
+    public ListaDeReproducao(ListaReproducaoDTO dto) {
+        this.nome = dto.nome();
+        this.descricao = dto.descricao();
+        this.musicas = dto.musicas().stream().map(musica ->
+                new Musica(musica.titulo(),
+                        musica.artista(), musica.album(), musica.ano(), musica.genero())).
+                            collect(Collectors.toList());
     }
 
     public String getNome() {
@@ -50,8 +61,4 @@ public class ListaDeReproducao {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-
-
-
 }
